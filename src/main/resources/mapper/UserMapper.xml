@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hxzy.mapper.UserMapper">
+	
+	<resultMap type="user" id="UserResultMap">
+		<!-- 
+			指定列名和属性名
+			column:数据库列名
+			property:java bean属性名
+		 -->
+		 
+		 <!-- 指定主键 -->
+		<id column="t_id" property="tId"/>
+		<result column="login_name" property="loginName"/>
+		<result column="login_pwd" property="loginPwd"/>
+		<result column="create_time" property="createTime"/>
+		<result column="last_login_time" property="lastLoginTime"/>
+		<result column="state" property="state"/>
+		<result column="role" property="role"/>
+	</resultMap>
+	
+	<!-- 
+		resultType:映射为java配置的类型
+		resultMap：映射为自定义的resultMap中指定的类型
+	 -->
+	<select id="queryOne" resultMap="UserResultMap">
+		select * from user_info where t_id = #{tId}
+	</select>
+
+	
+</mapper>
