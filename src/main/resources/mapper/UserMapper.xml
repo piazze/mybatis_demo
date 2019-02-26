@@ -29,5 +29,38 @@
 		select * from user_info where t_id = #{tId}
 	</select>
 
+	<!-- 
+		parameterType：指定执行的sql语句的参数类型
+	 -->
+	<insert id="add" parameterType="user">
+		<!-- 
+			将插入的主键返回到user对象中 
+			SELECT LAST_INSERT_ID()  :得到刚insert插入数据的主键值。只适用于主键自增长的列
+			keyProperty:将查询得到的主键设置到parameterType对象中哪个属性中
+			order: BEFORE，在执行插入前执行。  AFTER，在执行了插入后执行sql
+			resultType:指定返回的id的结果类型
+		-->
+		<selectKey keyProperty="tId" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		
+	
+		insert into user_info (
+			login_name,
+			login_pwd,
+			create_time,
+			last_login_time,
+			state,
+			role
+		)
+		values (
+			#{loginName},
+			#{loginPwd},
+			#{createTime},
+			#{lastLoginTime},
+			#{state},
+			#{role}
+		)
+	</insert>
 	
 </mapper>
