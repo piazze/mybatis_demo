@@ -38,9 +38,10 @@
 		</dependency>
 	</dependencies>
 
-	<!-- 设置局部的jdk -->
+	
 	<build>
 		<plugins>
+			<!-- 设置jdk编译环境 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
