@@ -12,13 +12,11 @@
 		 -->
 		 
 		 <!-- 指定主键 -->
-		<id column="t_id" property="tId"/>
-		<result column="login_name" property="loginName"/>
-		<result column="login_pwd" property="loginPwd"/>
-		<result column="create_time" property="createTime"/>
-		<result column="last_login_time" property="lastLoginTime"/>
-		<result column="state" property="state"/>
-		<result column="role" property="role"/>
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="birthday" property="birthday"/>
+		<result column="sex" property="sex"/>
+		<result column="address" property="address"/>
 	</resultMap>
 	
 	<!-- 
@@ -26,8 +24,37 @@
 		resultMap：映射为自定义的resultMap中指定的类型
 	 -->
 	<select id="queryOne" resultMap="UserResultMap">
-		select * from user_info where t_id = #{tId}
+		select * from user where id = #{id}
 	</select>
 
+	<!-- 
+		parameterType：指定执行的sql语句的参数类型
+	 -->
+	<insert id="add" parameterType="user">
+		<!-- 
+			将插入的主键返回到user对象中 
+			SELECT LAST_INSERT_ID()  :得到刚insert插入数据的主键值。只适用于主键自增长的列
+			keyProperty:将查询得到的主键设置到parameterType对象中哪个属性中
+			order: BEFORE，在执行插入前执行。  AFTER，在执行了插入后执行sql
+			resultType:指定返回的id的结果类型
+		-->
+		<selectKey keyProperty="id" order="AFTER" resultType="Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		
+	
+		insert into user (
+			username,
+			birthday,
+			sex,
+			address,
+		)
+		values (
+			#{username},
+			#{birthday},
+			#{sex},
+			#{address},
+		)
+	</insert>
 	
 </mapper>

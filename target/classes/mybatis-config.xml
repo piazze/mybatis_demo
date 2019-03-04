@@ -9,11 +9,17 @@
 	<settings>
 		<!-- 使用日志输出mybatis执行过程 -->
 		<setting name="logImpl" value="LOG4J"/>
+		
+		<!-- 
+			延迟加载的全局开关。当开启时，所有关联对象都会延迟加载。 特定关联关系中可通过设置fetchType属性来覆盖该项的开关状态。
+		 -->
+		<setting name="lazyLoadingEnabled" value="true "/>
 	</settings>
 	
 	<!-- 指定类型别名 -->
 	<typeAliases>
-		<typeAlias type="com.hxzy.entity.User" alias="user"/>
+		<!-- <typeAlias type="com.hxzy.entity.User" alias="user"/> -->
+		<package name="com.hxzy.entity"/>
 	</typeAliases>
 
 	<environments default="development">
@@ -34,5 +40,6 @@
 	<!-- 配置mybatis映射文件 -->
 	<mappers>
 		<mapper resource="mapper/UserMapper.xml" />
+		<mapper resource="mapper/OrdersMapper.xml" />
 	</mappers>
 </configuration>
