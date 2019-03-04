@@ -36,6 +36,11 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.4.6</version>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
 	</dependencies>
 
 	
@@ -51,16 +56,16 @@
 				</configuration>
 			</plugin>
 			
-			<!--
+			<!-- 
 				tomcat插件
 				
-				tomcat:deploy   --部署一个web war包
-				tomcat:reload   --重新加载web war包
-				tomcat:start    --启动tomcat
-				tomcat:stop    --停止tomcat
-				tomcat:undeploy--停止一个war包
+				tomcat:deploy		部署一个web war包
+				tomcat:reload		重新加载web war包
+				tomcat:start    启动tomcat
+				tomcat:stop    停止tomcat
+				tomcat:undeploy停止一个war包
 				tomcat:run  启动嵌入式tomcat ，并运行当前项目
-			-->
+			 -->
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
@@ -74,3 +79,4 @@
 	</build>
 
 </project>
+
