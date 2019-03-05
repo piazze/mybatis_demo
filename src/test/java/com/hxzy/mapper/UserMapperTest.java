@@ -8,6 +8,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.hxzy.entity.User;
@@ -15,6 +16,7 @@ import com.hxzy.entity.User;
 public class UserMapperTest {
 
 	@Test
+	@Ignore
 	public void testAdd() {
 		String resource = "mybatis-config.xml";
 		InputStream inputStream;
@@ -26,13 +28,6 @@ public class UserMapperTest {
 			
 			UserMapper mapper = session.getMapper(UserMapper.class);
 			
-			User user = new User(0, "test", "111", new Date(), new Date(), 1, 1);
-			
-			int add = mapper.add(user);
-			
-			if (add != 0) {
-				System.out.println("key:" + user.gettId());
-			}
 			
 			/*
 			 *提交事务 

@@ -12,13 +12,11 @@
 		 -->
 		 
 		 <!-- 指定主键 -->
-		<id column="t_id" property="tId"/>
-		<result column="login_name" property="loginName"/>
-		<result column="login_pwd" property="loginPwd"/>
-		<result column="create_time" property="createTime"/>
-		<result column="last_login_time" property="lastLoginTime"/>
-		<result column="state" property="state"/>
-		<result column="role" property="role"/>
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="birthday" property="birthday"/>
+		<result column="sex" property="sex"/>
+		<result column="address" property="address"/>
 	</resultMap>
 	
 	<!-- 
@@ -26,7 +24,7 @@
 		resultMap：映射为自定义的resultMap中指定的类型
 	 -->
 	<select id="queryOne" resultMap="UserResultMap">
-		select * from user_info where t_id = #{tId}
+		select * from user where id = #{id}
 	</select>
 
 	<!-- 
@@ -40,26 +38,22 @@
 			order: BEFORE，在执行插入前执行。  AFTER，在执行了插入后执行sql
 			resultType:指定返回的id的结果类型
 		-->
-		<selectKey keyProperty="tId" order="AFTER" resultType="int">
+		<selectKey keyProperty="id" order="AFTER" resultType="Integer">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 		
 	
-		insert into user_info (
-			login_name,
-			login_pwd,
-			create_time,
-			last_login_time,
-			state,
-			role
+		insert into user (
+			username,
+			birthday,
+			sex,
+			address,
 		)
 		values (
-			#{loginName},
-			#{loginPwd},
-			#{createTime},
-			#{lastLoginTime},
-			#{state},
-			#{role}
+			#{username},
+			#{birthday},
+			#{sex},
+			#{address},
 		)
 	</insert>
 	

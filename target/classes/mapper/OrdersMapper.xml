@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hxzy.mapper.OrdersMapper">
+	
+	<resultMap type="orders" id="ordersResultMap">
+		<!-- 
+			指定列名和属性名
+			column:数据库列名
+			property:java bean属性名
+		 -->
+		 
+		 <!-- 指定主键 -->
+		<id column="oid" property="id"/>
+		<result column="user_id" property="userId"/>
+		<result column="number" property="number"/>
+		<result column="createtime" property="createTime"/>
+		<result column="note" property="note"/>
+		
+		<!-- property中的值为orders类中的user对象名 -->
+		<association property="user" javaType="user" columnPrefix="u_">
+			<!-- 此处的id为sql语句中，查询的oraders表，关于user的外键的列的别名 -->
+			<id column="user_id" property="id"/>
+			<result column="username" property="username"/>
+			<result column="birthday" property="birthday"/>
+			<result column="sex" property="sex"/>
+			<result column="address" property="address"/>
+		</association>
+	</resultMap>
+	
+	<resultMap type="orders" id="ordersResultMap2">
+		<!-- 
+			指定列名和属性名
+			column:数据库列名
+			property:java bean属性名
+		 -->
+		 
+		 <!-- 指定主键 -->
+		<id column="id" property="id"/>
+		<result column="user_id" property="userId"/>
+		<result column="number" property="number"/>
+		<result column="createtime" property="createTime"/>
+		<result column="note" property="note"/>
+		
+		<!-- 跨命名空间的查询，需要加上命名空间
+			select：指定延迟加载需要执行的statement的id（根据user_id查询用户信息）
+		 -->
+		<association property="user" javaType="user" select="com.hxzy.mapper.UserMapper.queryOne" column="user_id" fetchType="lazy"></association>
+	</resultMap>
+	
+	<sql id="queryOrdersSQL">
+		select u.id u_id,
+			u.username u_username,
+			u.birthday u_birthday,
+			u.sex u_sex,
+			u.address u_address,
+			o.id oid,
+			o.user_id,
+			o.number,
+			o.createtime,
+			o.note
+		from `user` u
+		inner join orders o
+		on u.id = o.user_id
+	</sql>
+	
+	<!-- 
+		resultType:映射为java配置的类型
+		resultMap：映射为自定义的resultMap中指定的类型
+	 -->
+	<select id="queryOne" resultMap="ordersResultMap">
+		<include refid="queryOrdersSQL"></include>
+		where o.id = #{id}
+	</select>
+	<!-- <select id="queryAll" resultMap="ordersResultMap2">
+		<include refid="queryOrdersSQL"></include>
+	</select> -->
+	
+	<!-- 
+		使用延迟加载，先去查询简单的sql（最好单表，也可以关联查询），再去按需加载关联查询的其他信息
+	 -->
+	<select id="queryAllLazy" resultMap="ordersResultMap2">
+		select * from orders 
+	</select>
+</mapper>

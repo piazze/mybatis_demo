@@ -9,73 +9,58 @@ public class User implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1496924812268683935L;
-	private int tId;
-	private String loginName;
-	private String loginPwd;
-	private Date createTime;
-	private Date lastLoginTime;
-	private int state;
-	private int role;
-	public int gettId() {
-		return tId;
+	private int id;
+	private String username;
+	private Date birthday;
+	private char sex;
+	private String address;
+	public int getId() {
+		return id;
 	}
-	public void settId(int tId) {
-		this.tId = tId;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getLoginName() {
-		return loginName;
+	public String getUsername() {
+		return username;
 	}
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public String getLoginPwd() {
-		return loginPwd;
+	public Date getBirthday() {
+		return birthday;
 	}
-	public void setLoginPwd(String loginPwd) {
-		this.loginPwd = loginPwd;
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
-	public Date getCreateTime() {
-		return createTime;
+	public char getSex() {
+		return sex;
 	}
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+	public void setSex(char sex) {
+		this.sex = sex;
 	}
-	public Date getLastLoginTime() {
-		return lastLoginTime;
+	public String getAddress() {
+		return address;
 	}
-	public void setLastLoginTime(Date lastLoginTime) {
-		this.lastLoginTime = lastLoginTime;
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	public int getState() {
-		return state;
-	}
-	public void setState(int state) {
-		this.state = state;
-	}
-	public int getRole() {
-		return role;
-	}
-	public void setRole(int role) {
-		this.role = role;
-	}
-	public User(int tId, String loginName, String loginPwd, Date createTime, Date lastLoginTime, int state, int role) {
+	public User(int id, String username, Date birthday, char sex, String address) {
 		super();
-		this.tId = tId;
-		this.loginName = loginName;
-		this.loginPwd = loginPwd;
-		this.createTime = createTime;
-		this.lastLoginTime = lastLoginTime;
-		this.state = state;
-		this.role = role;
+		this.id = id;
+		this.username = username;
+		this.birthday = birthday;
+		this.sex = sex;
+		this.address = address;
 	}
 	public User() {
 		super();
 	}
 	@Override
 	public String toString() {
-		return "User [tId=" + tId + ", loginName=" + loginName + ", loginPwd=" + loginPwd + ", createTime=" + createTime
-				+ ", lastLoginTime=" + lastLoginTime + ", state=" + state + ", role=" + role + "]";
+		return "User [id=" + id + ", username=" + username + ", birthday=" + birthday + ", sex=" + sex + ", address="
+				+ address + "]";
 	}
+	
 	
 	
 }
